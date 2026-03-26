@@ -1,0 +1,10 @@
+<ul>
+  <% items.forEach(function(item) { %>
+    <li>
+      <a href="/<%= item.link %>">
+        <%= item.name %> 
+        <i class="fa fa-play-circle" style="font-size:20px;color:black"></i>
+      </a>
+    </li>
+  <% }); %>
+</ul>

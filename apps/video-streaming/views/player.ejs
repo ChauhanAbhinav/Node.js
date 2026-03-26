@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Video Player</title>
+</head>
+<body>
+<h2>Playing: <%= videoName %></h2>
+
+<video width="600" controls>
+  <source src="/play/<%= videoName %>" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+<br>
+<a href="/">Back to list</a>
+</body>
+</html>

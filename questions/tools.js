@@ -143,7 +143,7 @@
 // persistence
 // distributed thinking
 
-// 11. 🌍 Rate Limiter Middleware
+// 11. Rate Limiter Middleware
 
 // Prevent abuse:
 
@@ -216,3 +216,99 @@
 
 // graph structures
 // parsing
+
+
+
+// File Uploading app ideas
+// Beginner Level
+// File Sharing App
+// Upload file → get shareable link
+// Download anytime
+
+// Expiry link
+// Password protected download
+// Image Upload & Preview
+// Upload image → show preview
+// Store in uploads/
+
+// Resize image
+// Convert format (PNG → JPG)
+// Resume Uploader
+// Upload resume (PDF)
+// Store with user name
+
+// Validate file type (PDF only)
+// Max size limit
+// Multi File Upload Manager
+// Upload multiple files
+// List all uploaded files
+
+// Delete file
+// Rename file
+// Intermediate Level
+// CSV Upload & Data Parser
+// Upload CSV
+// Parse and show data in table
+
+// streams (important)
+// large file handling
+// Image Gallery App
+// Upload images
+// Display in grid UI
+
+
+// Like / comment
+// Pagination
+// File Compressor App
+// Upload file → download compressed version
+
+// zlib (streams)
+// Document Scanner (OCR)
+// Upload image/PDF
+// Extract text
+// Use:
+
+// OCR libraries
+// Advanced Level (Interview Gold 🔥)
+// Upload to Cloud (AWS S3)
+// Upload file → store in S3
+// Return public URL
+
+// Concepts:
+
+// Streams
+// Signed URLs
+// Video Upload + Streaming
+// Upload video
+// Stream using range requests
+// Concepts:
+// chunk streaming
+// HTTP range headers
+
+// Chunk Upload (Large Files)
+// Upload large files in parts
+// Resume upload
+// Merge chunks
+
+// Secure File Upload System
+// JWT auth
+// Virus scan (mock)
+// File validation
+
+// Unique Ideas (Stand Out)
+
+// AI Resume Analyzer
+// Upload resume
+// Get suggestions
+
+// Image Background Remover
+// Upload image
+// Remove background
+
+// Log File Analyzer
+// Upload .log file
+// Show:
+// errors count
+// warnings
+
+// Great for Node.js + streams
