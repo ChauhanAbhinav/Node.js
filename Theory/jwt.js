@@ -8,7 +8,7 @@
 // Authorization is done after Authentication (e.g., role-based permissions).
 // Authorization uses settings like roles, policies, and access tokens.
 
-// JWT (JSON Web Token) is used for authentication & authorization.
+// JWT (JSON Web Token) is used for authentication.
 // After login, the server gives a token → client sends it in every request → server verifies it.
 
 

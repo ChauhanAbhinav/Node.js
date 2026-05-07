@@ -1,9 +1,22 @@
-// Node.js Event Loop
+// // Node.js
+// Node.js is a runtime environment that allows you to run JavaScript on the server side.
+// It is built on Chrome's V8 JavaScript engine and uses an event-driven, non-blocking I/O model, making it efficient and suitable for building scalable network applications.
+
+// Node.js is single-threaded and non-blocking (i.e. incoming requests don't wait for each other — I/O operations, DB queries, file reads, API calls). Node.js registers a callback and continues processing other requests.
+
 // The event loop is a fundamental part of Node.js that allows it to handle multiple operations concurrently without blocking the main thread.
 // It works by continuously checking for and executing tasks from the event queue, allowing Node.js to perform non-blocking I/O operations efficiently.
 
-// The event loop has several phases, including timers, I/O callbacks, idle/prepare, poll, check, and close callbacks.
-// Each phase has its own queue of tasks, and the event loop processes them in a specific order.
+// The event loop in Node.js is powered by libuv and runs on a single thread (the main thread).
+
+// 1. timers — executes setTimeout and setInterval callbacks whose threshold has elapsed.
+// 2. pending callbacks — I/O callbacks deferred from the previous iteration.
+// 3. idle/prepare — internal use only.
+// 4. poll — retrieves new I/O events; executes I/O-related callbacks. If no timers are scheduled, the loop blocks here.
+// 5. check — setImmediate() callbacks run here, always after poll.
+// 6. close callbacks — e.g., socket.on('close').
+
+// Between each phase, Node.js drains the microtask queue (Promise callbacks via process.nextTick first, then Promises). process.nextTick always fires before any I/O, even before setImmediate. This ordering is critical for designing correct async flows and avoiding starvation.
 
 // Event Loop Phases:
 // 1. Timers: Executes callbacks scheduled by setTimeout and setInterval.
@@ -51,49 +64,50 @@ const net = require('net');
 
 console.log("1. Start (Sync)");
 
+// Check Phase
+setImmediate(() => {
+  console.log("5. setImmediate (Check Phase)");
+});
+
 // Timers Phase
 setTimeout(() => {
   console.log("4. setTimeout (Timers Phase)");
 }, 0);
 
-// Check Phase
-setImmediate(() => {
-  console.log("6. setImmediate (Check Phase)");
-});
-
-// Poll Phase
-fs.readFile(__filename, () => {
-  console.log("5. fs.readFile (Poll Phase)");
-
-  process.nextTick(() => {
-    console.log("5.1 nextTick inside I/O");
-  });
-
-  Promise.resolve().then(() => {
-    console.log("5.2 Promise inside I/O");
-  });
-});
-
-//Close Callbacks Phase
+// Close Callbacks Phase
 const server = net.createServer((socket) => {
-  console.log("Client connected");
   socket.on('close', () => {
     console.log("Socket closed (Close Callbacks Phase)");
   });
   socket.destroy(); // force close
+    console.log("Client connected");
 });
+
 server.listen(3000, () => {
   const client = net.createConnection(3000, () => {
     console.log("Client connected to server");
   });
 });
 
-// Microtasks
-process.nextTick(() => {
-  console.log("3.1 nextTick (Microtask)");
+// Poll Phase
+fs.readFile(__filename, () => {
+  console.log("6. fs.readFile (Poll Phase)");
+
+  process.nextTick(() => {
+    console.log("6.1 nextTick inside I/O");
+  });
+
+  Promise.resolve().then(() => {
+    console.log("6.2 Promise inside I/O");
+  });
 });
+
+// Microtasks
 Promise.resolve().then(() => {
   console.log("3.1 Promise (Microtask)");
+});
+process.nextTick(() => {
+  console.log("3.1 nextTick (Microtask)");
 });
 
 console.log("2. End (Sync)");
